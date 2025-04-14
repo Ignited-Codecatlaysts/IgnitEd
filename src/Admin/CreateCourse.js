@@ -18,9 +18,10 @@ import { database } from "./firebase";
 import "./CreateCourse.css";
 import loader from "../icons/loader.svg";
 import MagicEditor from "../icons/MagicEditor.png";
+import workerSrc from "pdfjs-dist/build/pdf.worker.min.js"; // Import the worker locally
 
-// Set PDF.js worker
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+// Set PDF.js worker to the local file
+pdfjs.GlobalWorkerOptions.workerSrc = workerSrc;
 
 // Initialize Google AI Model
 let API_KEY = process.env.REACT_APP_GEMINI;
@@ -304,16 +305,17 @@ export default function CreateCourse({ AdminName, Role }) {
             />
           </label>
 
-          <Link to="/Admin/magicWritter">
-            {/* <button className="create-course-button">
+          {/* <Link to="/Admin/magicWritter">
+            <button className="create-course-button">
               <FaEdit /> Magic Writer
-            </button> */}
-          </Link>
+            </button>
+          </Link> */}
           <Link to="/Admin/webcrawler">
             <button className="create-course-button">
               <FaEye /> Web Search
             </button>
           </Link>
+          
           <button className="add-courses-button" onClick={fetchCoursesFromRepo}>
             <FaFolderOpen /> Select from Repository
           </button>
